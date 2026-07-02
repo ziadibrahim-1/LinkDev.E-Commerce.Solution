@@ -1,5 +1,6 @@
 using LinkDev.ECommerce.Infrastructure.Peresistence.Data;
 using LinkDev.ECommerce.Infrastructure.Persistence;
+using LinkDev.ECommerce.Infrastructure.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 namespace LinkDev.ECommerce.APIs
@@ -37,6 +38,8 @@ namespace LinkDev.ECommerce.APIs
                 var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
                 if(pendingMigrations.Any())
                      await context.Database.MigrateAsync();
+
+                await SeedingData.SeedDataAsync(context);
                 
             }
             catch (Exception ex)
