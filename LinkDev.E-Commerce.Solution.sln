@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkDev.ECommerce.Applicati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkDev.ECommerce.Infrastructure", "LinkDev.ECommerce.Infrastructure\LinkDev.ECommerce.Infrastructure.csproj", "{F400DD9D-FC78-4590-AD95-C3BD6C1F75E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkDev.ECommerce.Infrastructure.Peresistence", "LinkDev.ECommerce.Infrastructure.Peresistence\LinkDev.ECommerce.Infrastructure.Peresistence.csproj", "{57490502-471B-453A-BB03-47589A46F81E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkDev.ECommerce.Infrastructure.Persistence", "LinkDev.ECommerce.Infrastructure.Peresistence\LinkDev.ECommerce.Infrastructure.Persistence.csproj", "{57490502-471B-453A-BB03-47589A46F81E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkDev.ECommerce.Dashboard", "LinkDev.ECommerce.Dashboard\LinkDev.ECommerce.Dashboard.csproj", "{36FD32DF-754E-43B3-AE5A-D1C8D913D091}"
 EndProject

@@ -12,6 +12,10 @@
     
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LinkDev.ECommerce.Infrastructure.Peresistence\LinkDev.ECommerce.Infrastructure.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>
 
    

@@ -1,6 +1,4 @@
-
-using Microsoft.AspNetCore.Builder;
-
+using LinkDev.ECommerce.Infrastructure.Persistence;
 namespace LinkDev.ECommerce.APIs
 {
     public class Program
@@ -17,6 +15,8 @@ namespace LinkDev.ECommerce.APIs
             builder.Services.AddOpenApi();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddPersistence(builder.Configuration);
 
             #endregion
 
