@@ -1,0 +1,6 @@
+@LinkDev.ECommerce.APIs_HostAddress = http://localhost:5271
+
+GET {{LinkDev.ECommerce.APIs_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
