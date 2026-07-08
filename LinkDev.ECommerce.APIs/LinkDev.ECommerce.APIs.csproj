@@ -17,6 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LinkDev.ECommerce.APIs.Controllers\LinkDev.ECommerce.APIs.Controllers.csproj" />
+    <ProjectReference Include="..\LinkDev.ECommerce.Application\LinkDev.ECommerce.Application.csproj" />
     <ProjectReference Include="..\LinkDev.ECommerce.Infrastructure.Peresistence\LinkDev.ECommerce.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 

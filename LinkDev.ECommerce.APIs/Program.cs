@@ -1,8 +1,7 @@
-using LinkDev.ECommerce.Infrastructure.Peresistence.Data;
+using LinkDev.ECommerce.APIs.Extentions;
+using LinkDev.ECommerce.Application;
 using LinkDev.ECommerce.Infrastructure.Persistence;
-using LinkDev.ECommerce.Infrastructure.Persistence.Data;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+using AssemblyInformation = LinkDev.ECommerce.APIs.Controllers.AssemblyInformation;
 namespace LinkDev.ECommerce.APIs
 {
     public class Program
@@ -14,39 +13,23 @@ namespace LinkDev.ECommerce.APIs
             // Add services to the container.
 
             #region Configure Services
-            builder.Services.AddControllers();
+            builder.Services
+                .AddControllers()
+                .AddApplicationPart(typeof(AssemblyInformation).Assembly);
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddPersistence(builder.Configuration);
+            builder.Services.AddApplicationServices();
 
             #endregion
 
             var app = builder.Build();
 
-            #region Update Database
-            using var scope = app.Services.CreateScope();
-            var services = scope.ServiceProvider;
-            var context = services.GetRequiredService<StoreContext>();
-
-            var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-
-            try
-            {
-                var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
-                if(pendingMigrations.Any())
-                     await context.Database.MigrateAsync();
-
-                await SeedingData.SeedDataAsync(context);
-                
-            }
-            catch (Exception ex)
-            {
-                var logger = loggerFactory.CreateLogger<Program>();
-                logger.LogError(ex, "An error occurred while migrating the database.");
-            }
+            #region Databases Initialization
+            await app.InitializeStoreContext();
             #endregion
 
             #region Configure
@@ -63,8 +46,9 @@ namespace LinkDev.ECommerce.APIs
 
             app.UseAuthorization();
 
-
+            app.UseStaticFiles();
             app.MapControllers();
+
             #endregion
 
             app.Run();

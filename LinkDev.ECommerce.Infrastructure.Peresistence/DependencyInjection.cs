@@ -1,4 +1,7 @@
-﻿using LinkDev.ECommerce.Infrastructure.Peresistence.Data;
+﻿using LinkDev.ECommerce.Domain.Contracts;
+using LinkDev.ECommerce.Infrastructure.Peresistence.Data;
+using LinkDev.ECommerce.Infrastructure.Persistence.Data;
+using LinkDev.ECommerce.Infrastructure.Persistence.UnitOfWorks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,8 +13,14 @@ namespace LinkDev.ECommerce.Infrastructure.Persistence
         {
             services.AddDbContext<StoreContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("StoreContext"));
+                options
+                .UseLazyLoadingProxies()   
+                .UseSqlServer(configuration.GetConnectionString("StoreContext"));
             });
+
+            services.AddScoped(typeof(IStoreContextInitializer) ,typeof(StoreContextInitializer));
+            services.AddScoped(typeof(IUnitOfWork),typeof(UnitOfWork));
+            
             return services;
         }
     }
