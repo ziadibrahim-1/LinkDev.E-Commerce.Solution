@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using LinkDev.ECommerce.Application.Abstraction.Services;
 using LinkDev.ECommerce.Application.Abstraction.Services.Product;
-using LinkDev.ECommerce.Application.Services.Product;
-using LinkDev.ECommerce.Domain.Contracts;
+using LinkDev.ECommerce.Application.Services.Products;
+using LinkDev.ECommerce.Domain.Contracts.Peresistence;
 
 namespace LinkDev.ECommerce.Application.Services
 {

@@ -1,4 +1,4 @@
-﻿using LinkDev.ECommerce.Domain.Contracts;
+﻿using LinkDev.ECommerce.Domain.Contracts.Peresistence;
 using LinkDev.ECommerce.Domain.Entity.Products;
 using LinkDev.ECommerce.Infrastructure.Peresistence.Data;
 using Microsoft.EntityFrameworkCore;

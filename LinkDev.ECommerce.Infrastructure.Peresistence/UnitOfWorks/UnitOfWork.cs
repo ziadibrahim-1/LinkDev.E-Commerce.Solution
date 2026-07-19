@@ -1,6 +1,6 @@
-﻿using LinkDev.ECommerce.Domain.Contracts;
+﻿using LinkDev.ECommerce.Domain.Contracts.Peresistence;
 using LinkDev.ECommerce.Infrastructure.Peresistence.Data;
-using LinkDev.ECommerce.Infrastructure.Persistence.Repositories;
+using LinkDev.ECommerce.Infrastructure.Persistence.Repositories.GenericRepository;
 using System.Collections.Concurrent;
 
 namespace LinkDev.ECommerce.Infrastructure.Persistence.UnitOfWorks

@@ -1,4 +1,4 @@
-﻿using LinkDev.ECommerce.Domain.Contracts;
+﻿using LinkDev.ECommerce.Domain.Contracts.Peresistence;
 
 namespace LinkDev.ECommerce.APIs.Extentions
 {

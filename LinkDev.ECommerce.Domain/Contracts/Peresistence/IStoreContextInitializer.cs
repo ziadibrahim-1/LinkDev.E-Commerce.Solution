@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.ECommerce.Domain.Contracts
+namespace LinkDev.ECommerce.Domain.Contracts.Peresistence
 {
     public interface IStoreContextInitializer
     {

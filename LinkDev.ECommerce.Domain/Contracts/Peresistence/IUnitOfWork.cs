@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkDev.ECommerce.Domain.Contracts
+namespace LinkDev.ECommerce.Domain.Contracts.Peresistence
 {
     public interface IUnitOfWork : IAsyncDisposable
     {
         public IGenericRepository<TEntity , TKey> GetRepository<TEntity , TKey>()
-            where TEntity : BaseEntity<TKey> where TKey : IEquatable<TKey>;
+            where TEntity : BaseEntity<TKey>
+            where TKey : IEquatable<TKey>;
 
         Task<int> CompleteAsync();
 

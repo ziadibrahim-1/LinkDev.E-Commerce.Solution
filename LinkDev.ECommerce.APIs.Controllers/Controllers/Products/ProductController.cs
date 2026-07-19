@@ -1,4 +1,5 @@
 ﻿using LinkDev.ECommerce.APIs.Controllers.Controllers.Base;
+using LinkDev.ECommerce.Application.Abstraction.Common;
 using LinkDev.ECommerce.Application.Abstraction.DTOs.Product;
 using LinkDev.ECommerce.Application.Abstraction.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +10,9 @@ namespace LinkDev.ECommerce.APIs.Controllers.Controllers.Products
     {
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductDTo>>> GetProducts()
+        public async Task<ActionResult<Pagination<ProductDTo>>> GetProducts([FromQuery]ProductSpeceficationsParams param)
         {
-            var products = await serviceManager.ProductService.GetAllProductsAsync();
+            var products = await serviceManager.ProductService.GetAllProductsAsync(param);
             return Ok(products);
         }
         [HttpGet("{id:int}")]
