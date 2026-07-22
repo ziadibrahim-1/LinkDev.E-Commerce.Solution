@@ -2,6 +2,7 @@
 using LinkDev.ECommerce.Application.Abstraction.Common;
 using LinkDev.ECommerce.Application.Abstraction.DTOs.Product;
 using LinkDev.ECommerce.Application.Abstraction.Services.Product;
+using LinkDev.ECommerce.Application.Exceptions;
 using LinkDev.ECommerce.Domain.Contracts.Peresistence;
 using LinkDev.ECommerce.Domain.Entity.Products;
 using LinkDev.ECommerce.Domain.Specefication.Products;
@@ -47,6 +48,8 @@ namespace LinkDev.ECommerce.Application.Services.Products
         {
             var specs = new ProductWithBrandAndCategorySpecifications(id);
             var product = await unitOfWork.GetRepository<Product, int>().GetWithSpcesAsync(specs);
+            if (product is null)
+                throw new NotFoundException(nameof(Product), id);
             var ProductResult = mapper.Map<ProductDTo>(product);
             return ProductResult;
         }

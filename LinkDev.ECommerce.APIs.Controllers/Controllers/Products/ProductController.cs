@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.ECommerce.APIs.Controllers.Controllers.Products
 {
-    public class ProductController(IServiceManager serviceManager) : BaseApiController
+    public class ProductController(IServiceManager serviceManager) : BaseApiController(serviceManager)
     {
 
         [HttpGet]
@@ -19,8 +19,7 @@ namespace LinkDev.ECommerce.APIs.Controllers.Controllers.Products
         public async Task<ActionResult<ProductDTo>> GetProductById(int id)
         {
             var product = await serviceManager.ProductService.GetProductByIdAsync(id);
-            if (product == null)
-                return NotFound(new { StatusCode = 404, Message = $"Product with id {id} not found." });
+            
             return Ok(product);
         }
         [HttpGet("category")]

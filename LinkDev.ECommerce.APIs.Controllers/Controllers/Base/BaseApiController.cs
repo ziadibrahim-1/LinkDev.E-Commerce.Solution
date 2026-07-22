@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LinkDev.ECommerce.Application.Abstraction.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LinkDev.ECommerce.APIs.Controllers.Controllers.Base
 {
@@ -6,5 +7,8 @@ namespace LinkDev.ECommerce.APIs.Controllers.Controllers.Base
     [ApiController]
     public class BaseApiController : ControllerBase
     {
+        public BaseApiController(IServiceManager serviceManager)
+        {
+        }
     }
 }

@@ -1,6 +1,9 @@
+using LinkDev.ECommerce.APIs.Controllers.Error;
 using LinkDev.ECommerce.APIs.Extentions;
+using LinkDev.ECommerce.APIs.Midlewares;
 using LinkDev.ECommerce.Application;
 using LinkDev.ECommerce.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Mvc;
 using AssemblyInformation = LinkDev.ECommerce.APIs.Controllers.AssemblyInformation;
 namespace LinkDev.ECommerce.APIs
 {
@@ -15,7 +18,22 @@ namespace LinkDev.ECommerce.APIs
             #region Configure Services
             builder.Services
                 .AddControllers()
-                .AddApplicationPart(typeof(AssemblyInformation).Assembly);
+                .AddApplicationPart(typeof(AssemblyInformation).Assembly)
+                .ConfigureApiBehaviorOptions(options =>
+                    {
+                        options.SuppressModelStateInvalidFilter = false;
+                        options.InvalidModelStateResponseFactory = (actionContext) =>
+                        {
+                            var errors = actionContext.ModelState.Where(e => e.Value!.Errors.Count > 0)
+                            .Select(e => new ApiValidationErrorResponse.ValidationError
+                            {
+                                Field = e.Key,
+                                Message = e.Value!.Errors.Select(er => er.ErrorMessage)
+                            });
+                            return new BadRequestObjectResult(new ApiValidationErrorResponse { Errors = errors });
+                        };
+                    }
+                );
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
             builder.Services.AddEndpointsApiExplorer();
@@ -33,6 +51,7 @@ namespace LinkDev.ECommerce.APIs
             #endregion
 
             #region Configure
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -43,7 +62,9 @@ namespace LinkDev.ECommerce.APIs
             }
 
             app.UseHttpsRedirection();
+            app.UseStatusCodePagesWithReExecute("/Errors/{0}");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseStaticFiles();
